@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+</head>
+<body>
+<section>
+  <!-- Side Bar Menu Start -->
+  <div class="sidebar">
+    <span onclick="toggleSidebar()" class="cross-btn"><i class="fa-solid fa-xmark"></i></span>
+    <a href="/user/dashboard" class="active"><i class="fa-solid fa-house"></i> Home</a>
+    <a href="/user/view-contact/0"><i class="fa-solid fa-book-open-reader"></i> View Contact</a>
+    <a href="/user/add-contact"><i class="fa-solid fa-user-plus"></i> Add Contact</a>
+    <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+    <a href="#"><i class="fa-solid fa-gears"></i> Setting</a>
+    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+  </div>
+  <!-- Side Bar Menu End -->
+  <!-- Main Content Start -->
+  <div class="content">
+    <div>
+      <i onclick="toggleSidebar()" class="fa-solid fa-bars bar-btn"></i>
+    </div>
+    <div class="card m-3">
+      <div class="card-header">
+        <h1>All Contacts</h1>
+      </div>
+      <div class="card-body">
+        <!-- Contact showing Table Start -->
+        <table class="table table-striped table-dark table-hover">
+          <thead>
+          <tr class="text-center">
+            <th scope="col">#ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Profession</th>
+            <th scope="col">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="c : ${contacts}" class="text-center">
+            <th scope="row" th:text="${'2025'+c.id}"></th>
+            <td>
+              <img class="my-contact-img" src="" th:src="@{'/images/'+${c.image}}" alt="img">
+              <span th:text="${c.name}"></span>
+            </td>
+            <td>
+              <a class="text-white" href="#" th:href="@{'/user/view-content/' + ${c.id}}">
+                <span th:text="${c.email}"></span>
+              </a>
+            </td>
+            <td th:text="${c.phone}"></td>
+            <td th:text="${c.work}"></td>
+            <td>
+              <a class="text-decoration-none" href="#" th:href="@{'/user/view-content/' + ${c.id}}">
+                <i class="fa-solid fa-eye btn btn-success"></i>
+              </a>
+              <i class="fa-solid fa-pen-nib btn btn-warning"></i>
+              <a class="btn btn-danger" th:href="@{'/user/delete/'+${c.id}}">
+                <i class="fa-solid fa-trash"></i>
+              </a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <!-- Contact showing Table End -->
+        <!-- Pagination part Start -->
+        <div class="container text-center">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item" th:if="${currentPage != 0}">
+                <a class="text-decoration-none" th:href="@{(${currentPage - 1})}"><span class="page-link">&laquo;</span></a>
+              </li>
+              <li class="page-item"
+                  th:each="i : ${#numbers.sequence(1,totalPages)}"
+                  th:with="index=${i - 1}"
+                  th:classappend="${currentPage==index}? 'active':''">
+                <a class="page-link" href="#"
+                   th:href="@{(${i - 1})}">
+                  <span th:text="${i}"></span>
+                </a>
+              </li>
+              <li class="page-item" th:if="${currentPage+1 != totalPages}">
+                <a class="text-decoration-none" th:href="@{(${currentPage + 1})}"><span class="page-link">&raquo;</span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- Pagination part End -->
+      </div>
+    </div>
+  </div>
+  <!-- Main Content End -->
+</section>
+</body>
+</html>

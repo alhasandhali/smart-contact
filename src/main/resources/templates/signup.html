@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+<section class="banner-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card mt-3" style="padding-top: 40px;">
+                    <!-- Alert Message Block -->
+                    <div th:if="${session.message != null}" th:classappend="${session.message.type}" class="alert text-center" role="alert">
+                        <p th:text="${session.message.content}"></p>
+                    </div>
+                    <div class="card-header text-center">
+                        <img style="width: 80px; margin: 10px 0;" th:src="@{/images/contact-form.png}" alt="img">
+                        <h1><i>Sign Up</i></h1>
+                    </div>
+                    <div class="card-body">
+                        <form th:action="@{/process}" method="post" th:object="${user}">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input
+                                        type="text"
+                                        name="name"
+                                        class="form-control"
+                                        id="name"
+                                        th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
+                                        th:value="${user.name}"
+                                        placeholder="Enter your name..."
+                                        required
+                                >
+                                <div
+                                        id="validationServerNameFeedback" class="invalid-feedback"
+                                        th:each="e : ${#fields.errors('name')}" th:text="${e}">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input
+                                        type="email"
+                                        name="email"
+                                        class="form-control"
+                                        id="email"
+                                        th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : ''"
+                                        th:value="${user.email}"
+                                        placeholder="Enter your email..."
+                                        required
+                                >
+                                <div
+                                        id="validationServerEmailFeedback" class="invalid-feedback"
+                                        th:each="e : ${#fields.errors('email')}" th:text="${e}">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input
+                                        type="password"
+                                        name="password"
+                                        class="form-control"
+                                        id="password"
+                                        th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : ''"
+                                        placeholder="Enter your password..."
+                                        required
+                                >
+                                <div
+                                        id="validationServerPasswordFeedback" class="invalid-feedback"
+                                        th:each="e : ${#fields.errors('password')}" th:text="${e}">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="about" class="form-label">About</label>
+                                <textarea
+                                        style="background: transparent;"
+                                        placeholder="Please say something about you (upto 500 characters)"
+                                        name="about"
+                                        rows="10"
+                                        class="form-control"
+                                        id="about"
+                                        th:value="${user.about}"
+                                ></textarea>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input
+                                        type="checkbox"
+                                        name="agreed"
+                                        class="form-check-input"
+                                        id="exampleCheck1"
+                                >
+                                <a href="#">
+                                    <label class="form-check-label" for="exampleCheck1">Agree with terms & conditions</label>
+                                </a>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn bg-success text-white my-font-bold">Submit</button>
+                                <button type="reset" class="btn bg-warning my-font-bold">Reset</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="card-footer text-center">
+                        <span class="my-cs"><i>@alhasandhali</i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

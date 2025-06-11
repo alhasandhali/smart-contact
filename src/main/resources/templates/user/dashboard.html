@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+<section>
+                <div class="sidebar">
+                    <span onclick="toggleSidebar()" class="cross-btn"><i class="fa-solid fa-xmark"></i></span>
+                    <a href="/user/dashboard" class="active"><i class="fa-solid fa-house"></i> Home</a>
+                    <a href="/user/view-contact/0"><i class="fa-solid fa-book-open-reader"></i> View Contact</a>
+                    <a href="/user/add-contact"><i class="fa-solid fa-user-plus"></i> Add Contact</a>
+                    <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+                    <a href="#"><i class="fa-solid fa-gears"></i> Setting</a>
+                    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+                </div>
+                <div class="content">
+                    <i onclick="toggleSidebar()" class="fa-solid fa-bars bar-btn"></i>
+                    <h1 class="mt-3 ms-4">Dashboard</h1>
+<!--                    <div class="card">-->
+<!--                        <div class="card-header">-->
+<!--                            <h1 class="fst-italic">Dashboard</h1>-->
+<!--                        </div>-->
+<!--                        <div class="card-body">-->
+<!--                            <div class="text-center mt-5 mb-3">-->
+<!--                                <img src="/images/default.jpg" alt="default" class="img-fluid rounded mx-auto d-block">-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <p>Name: <span th:text="${user.name}"></span></p>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <p>E-mail: <span th:text="${user.email}"></span></p>-->
+<!--                            </div>-->
+<!--                            <div>-->
+<!--                                <p>About: <span th:text="${user.about}"></span></p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="card-footer text-center">-->
+<!--                            <a href="/logout" class="btn btn-primary">Log Out</a>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+</section>
+</body>
+</html>

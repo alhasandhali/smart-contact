@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="~{base::layout(~{::section})}" >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+</head>
+<body>
+<section>
+    <!-- Side Bar Menu Start -->
+    <div class="sidebar">
+        <span onclick="toggleSidebar()" class="cross-btn"><i class="fa-solid fa-xmark"></i></span>
+        <a href="/user/dashboard" class="active"><i class="fa-solid fa-house"></i> Home</a>
+        <a href="/user/view-contact/0"><i class="fa-solid fa-book-open-reader"></i> View Contact</a>
+        <a href="/user/add-contact"><i class="fa-solid fa-user-plus"></i> Add Contact</a>
+        <a href="#"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="#"><i class="fa-solid fa-gears"></i> Setting</a>
+        <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Log out</a>
+    </div>
+    <!-- Side Bar Menu End -->
+    <!-- Main Content Start -->
+    <div class="content">
+        <div>
+            <i onclick="toggleSidebar()" class="fa-solid fa-bars bar-btn"></i>
+        </div>
+        <div  th:if="${session.message != null}" class="container">
+            <div class="alert alert-success mt-3 ms-3 me-3 mb-0 text-center" role="alert" th:classappend="${'alert' + session.message.type}">
+                <span th:text="${session.message.content}"></span>
+            </div>
+        </div>
+        <div class="card m-3">
+            <div class="card-header">
+                <div class="text-center mt-4 mb-1">
+                    <img src="" th:src="@{'/images/' + ${contact.image}}" alt="image" class="my-contact-image">
+                    <h1 class="fs-3 mt-2" th:text="${contact.name}"></h1>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <i class="fa-solid fa-plus input-group-text" id="basic-addon2"></i>
+                        <input disabled="disabled" th:value="${contact.nickName}" type="text" class="form-control" placeholder="" aria-label="nickName" aria-describedby="basic-addon2">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="basic-addon3">@</span>
+                        <input disabled="disabled" th:value="${contact.email}" type="email" class="form-control" aria-label="email" aria-describedby="basic-addon3">
+                    </div>
+                    <div class="input-group mb-3">
+                        <i class="fa-solid fa-briefcase input-group-text" id="basic-addon4"></i>
+                        <input disabled="disabled" th:value="${contact.work}" type="text" class="form-control" aria-label="work" aria-describedby="basic-addon4">
+                    </div>
+                    <div class="input-group mb-3">
+                        <i class="fa-solid fa-phone input-group-text" id="basic-addon5"></i>
+                        <input disabled="disabled" th:value="${contact.phone}" type="number" class="form-control" aria-label="phone" aria-describedby="basic-addon5">
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea disabled="disabled" th:field="${contact.description}" rows="10" class="form-control" aria-label="description" aria-describedby="basic-addon7" style="height: 200px; width: 100%;"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a th:href="@{'/user/delete/'+${contact.id}}" class="btn btn-danger form-control mb-2">Delete</a>
+                <a class="btn btn-warning form-control">Update</a>
+            </div>
+        </div>
+    </div>
+    <!-- Main Content End -->
+</section>
+</body>
+</html>
