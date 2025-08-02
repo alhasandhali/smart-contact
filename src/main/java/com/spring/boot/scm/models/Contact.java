@@ -1,5 +1,6 @@
 package com.spring.boot.scm.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -20,6 +21,7 @@ public class Contact {
     @Column(length = 1000)
     private String description;
     @ManyToOne
+    @JsonIgnore
     private User user;
 
     public Contact() {
